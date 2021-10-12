@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="syntaxes\" />
+    <Folder Include="Syntaxes\" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo Copying builtIn syntax files...&#xD;&#xA;XCOPY &quot;$(ProjectDir)syntaxes&quot; &quot;$(TargetDir)syntaxes&quot; /R /Y /I" />
+    <Exec Command="echo Copying builtIn syntax files...&#xD;&#xA;XCOPY &quot;$(ProjectDir)Syntaxes&quot; &quot;$(TargetDir)Syntaxes&quot; /R /Y /I" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

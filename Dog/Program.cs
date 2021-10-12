@@ -14,7 +14,7 @@ namespace Dog
     class Program
     {
         private static readonly string ExeDir = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
-        private static readonly string SyntaxDir = Path.Combine(ExeDir, "syntaxes");
+        private static readonly string SyntaxDir = Path.Combine(ExeDir, "Syntaxes");
         private static readonly string ConfigFile = Path.Combine(ExeDir, "config.json");
         private static readonly Version MinSupportedConfigVersion = new Version(1, 0);
         private static Config _config;
@@ -22,10 +22,10 @@ namespace Dog
         static void Main(string[] args)
         {
             Arguments a = Arguments.Parse(args, (char)KeySelector.Linux);
-            bool showLines = (a.ContainsKey("l") || a.ContainsKey("-lines")) && !a.ContainsKey("-no-lines");
             if (a.Keyless.Count > 0)
             {
                 LoadConfig();
+                bool showLines = (a.ContainsKey("l") || a.ContainsKey("-lines")) && !a.ContainsKey("-no-lines");
                 foreach (string file in a.Keyless) PrettyPrint(file, showLines);
             }
         }
@@ -69,11 +69,6 @@ namespace Dog
                         languageSyntax.name = property.Value.ToString();
                         break;
                     }
-                    case "scope":
-                    {
-                        languageSyntax.scope = property.Value.ToString();
-                        break;
-                    }
                     case "variables":
                     {
                         languageSyntax.variables = new Dictionary<string, string>();
@@ -83,7 +78,7 @@ namespace Dog
                     }
                     case "contexts":
                     {
-                        languageSyntax.variables = new Dictionary<string, string>();
+                        languageSyntax.contexts = new Dictionary<string, string>();
                         break;
                     }
                 }

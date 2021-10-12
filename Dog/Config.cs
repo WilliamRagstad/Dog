@@ -14,13 +14,13 @@ namespace Dog
     class Config
     {
         public Version Version;
-        public string TestField;
+        public bool ShowLines;
         public Dictionary<string, string> Syntaxes;
 
         public static Config Default = new Config
         {
             Version = new Version(1, 0),
-            TestField = "This is a test field",
+            ShowLines = false,
             Syntaxes = new Dictionary<string, string> {
                 {"cs", "C#"},
                 {"csx", "C#"},
