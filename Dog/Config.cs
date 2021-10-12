@@ -13,15 +13,20 @@ namespace Dog
     /// </summary>
     class Config
     {
-        public Version Version;
-        public bool ShowLines;
-        public Dictionary<string, string> Syntaxes;
+        // ReSharper disable once InconsistentNaming
+        public float version;
+        // ReSharper disable once InconsistentNaming
+        public bool showLines;
+        // ReSharper disable once InconsistentNaming
+        public string defaultTheme;
+        // ReSharper disable once InconsistentNaming
+        public Dictionary<string, string> syntaxes;
 
         public static Config Default = new Config
         {
-            Version = new Version(1, 0),
-            ShowLines = false,
-            Syntaxes = new Dictionary<string, string> {
+            version = 1.0f,
+            showLines = false,
+            syntaxes = new Dictionary<string, string> {
                 {"cs", "C#"},
                 {"csx", "C#"},
                 {"java", "Java"},
@@ -36,7 +41,8 @@ namespace Dog
                 {"gpy", "Python"},
                 {"vpy", "Python"},
                 {"pxi", "Python"}
-            }
+            },
+            defaultTheme = "Dracula"
         };
     }
 }

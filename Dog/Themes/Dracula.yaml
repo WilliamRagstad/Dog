@@ -1,0 +1,13 @@
+﻿name: Dracula
+colors:
+  Unknown: White
+  Keyword: Yellow
+  Identifier: Cyan
+  Primitive: Orange
+  Numerical: "#FF6"
+  String: Green
+  Character: Lime
+  Operator: White
+  Parenthesis: Gray
+  Separator: Gray
+  Comment: DarkGreen

@@ -8,7 +8,6 @@
   <ItemGroup>
     <PackageReference Include="ANSI.Console" Version="2.5.0" />
     <PackageReference Include="ArgumentsUtil" Version="1.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 
@@ -17,11 +16,11 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo Copying builtIn syntax files...&#xD;&#xA;XCOPY &quot;$(ProjectDir)Syntaxes&quot; &quot;$(TargetDir)Syntaxes&quot; /R /Y /I" />
+    <Exec Command="echo Copying builtIn syntaxes...&#xD;&#xA;XCOPY &quot;$(ProjectDir)Syntaxes&quot; &quot;$(TargetDir)Syntaxes&quot; /R /Y /I&#xD;&#xA;echo Copying builtIn themes...&#xD;&#xA;XCOPY &quot;$(ProjectDir)Themes&quot; &quot;$(TargetDir)Themes&quot; /R /Y /I" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="DEL $(TargetDir)config.json" />
+    <Exec Command="REM DEL $(TargetDir)config.yaml" />
   </Target>
 
 </Project>
