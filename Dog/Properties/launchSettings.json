@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Dog": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\willi\\source\\repos\\Dog\\Examples\\test.py"
+    }
+  }
+}
