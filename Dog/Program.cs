@@ -13,10 +13,8 @@ namespace Dog
 {
     class Program
     {
-        private static readonly bool DebugMode = true;
-
         private static readonly string ExeDir = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
-        private static readonly string SyntaxDir = Path.Combine(ExeDir, "syntax");
+        private static readonly string SyntaxDir = Path.Combine(ExeDir, "syntaxes");
         private static readonly string ConfigFile = Path.Combine(ExeDir, "config.json");
         private static readonly Version MinSupportedConfigVersion = new Version(1, 0);
         private static Config _config;

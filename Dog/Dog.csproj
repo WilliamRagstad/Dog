@@ -13,11 +13,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="syntax\" />
+    <Folder Include="syntaxes\" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo Copying builtIn syntax files...&#xD;&#xA;XCOPY &quot;$(ProjectDir)syntax&quot; &quot;$(TargetDir)syntax&quot; /R /Y /I" />
+    <Exec Command="echo Copying builtIn syntax files...&#xD;&#xA;XCOPY &quot;$(ProjectDir)syntaxes&quot; &quot;$(TargetDir)syntaxes&quot; /R /Y /I" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="DEL $(TargetDir)config.json" />
   </Target>
 
 </Project>
