@@ -137,6 +137,7 @@ namespace Dog
                 if (rawLine == null) break;
                 foreach (var regex in syntax.colorPatterns)
                 {
+                    if (rawLine.Trim().Length == 0) break;
                     MatchCollection matches = new Regex(regex.Key).Matches(rawLine);
                     for (int i = matches.Count - 1; i >= 0; i--)
                     {
@@ -144,9 +145,10 @@ namespace Dog
                         if (match.Length == 0) continue;
                         string formattedMatch = match.Color(theme.colors[regex.Value]).ToString();
                         formattedLine = formattedLine.Replace(match, formattedMatch);
+                        rawLine = rawLine.Remove(matches[i].Index, matches[i].Length);
                     }
                 }
-                Console.Write(formattedLine);
+                Console.WriteLine(formattedLine);
             }
         }
     }
