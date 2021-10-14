@@ -32,3 +32,11 @@ This project is not original, and takes inspiration from a set of different othe
 * https://github.com/owenthereal/ccat
 * https://www.tecmint.com/bat-a-cat-clone-with-syntax-highlighting/
 
+## Logo
+
+All credits go to [Alfrey Davilla](https://dribbble.com/vaneltia) for the logo.
+
+### Why?
+
+The breed of dog in the logo is called dachshund which is similar to bash when pronounced, and I thought it was funny ^^.
+
