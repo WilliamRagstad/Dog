@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using ArgumentsUtil;
@@ -135,21 +136,43 @@ namespace Dog
                 string rawLine = reader.ReadLine();
                 string formattedLine = rawLine;
                 if (rawLine == null) break;
-                foreach (var regex in syntax.colorPatterns)
+
+                while (rawLine.Trim().Length > 0)
                 {
-                    if (rawLine.Trim().Length == 0) break;
-                    MatchCollection matches = new Regex(regex.Key).Matches(rawLine);
-                    for (int i = matches.Count - 1; i >= 0; i--)
+                    List<(Match, Color)> totalMatches = new List<(Match, Color)>();
+                    foreach (var regex in syntax.colorPatterns)
                     {
-                        string match = matches[i].Value;
-                        if (match.Length == 0) continue;
-                        string formattedMatch = match.Color(theme.colors[regex.Value]).ToString();
-                        formattedLine = formattedLine.Replace(match, formattedMatch);
-                        rawLine = rawLine.Remove(matches[i].Index, matches[i].Length);
+                        if (rawLine.Trim().Length == 0) break;
+                        MatchCollection matches = new Regex(regex.Key).Matches(rawLine);
+                        for (int i = matches.Count - 1; i >= 0; i--)
+                        {
+                            Match match = matches[i];
+                            if (match.Value.Trim().Length == 0) continue;
+                            totalMatches.Add((matches[i], theme.colors[regex.Value]));
+                            // string formattedMatch = match.Color(theme.colors[regex.Value]).ToString();
+                            // formattedLine = formattedLine.Replace(match, formattedMatch);
+                            // rawLine = rawLine.Remove(matches[i].Index, matches[i].Length);
+                        }
                     }
+                    if (totalMatches.Count == 0) break;
+                    totalMatches.Sort(new MatchesComparer());
+                    var longestMatch = totalMatches.First();
+                    if (!rawLine.Contains(longestMatch.Item1.Value)) continue;
+                    string formattedMatch = longestMatch.Item1.Value.Color(longestMatch.Item2).ToString();
+                    string substr = formattedMatch.Substring(longestMatch.Item1.Index);
+                    substr = substr.Replace(longestMatch.Item1.Value, formattedMatch);
+                    formattedLine = formattedLine.Insert(longestMatch.Item1.Index, substr);
+                    rawLine = rawLine.Remove(longestMatch.Item1.Index, longestMatch.Item1.Length);
                 }
+
                 Console.WriteLine(formattedLine);
             }
+
+        }
+
+        class MatchesComparer : IComparer<(Match, Color)>
+        {
+            public int Compare((Match, Color) x, (Match, Color) y) => -x.Item1.Length.CompareTo(y.Item1.Length);
         }
     }
 }
